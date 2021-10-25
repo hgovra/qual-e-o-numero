@@ -1,6 +1,6 @@
 # Qual é o número?
 
-Pequeno jogo realizado em React. Adivinhe o número de 1 a 300.
+Pequeno jogo desenvolvido em React. Adivinhe o número de 1 a 300.
 
 Realizado como teste de Desenvolvimento Front-End para Estúdio Sol.
 
