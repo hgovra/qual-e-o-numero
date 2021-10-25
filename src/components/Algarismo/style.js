@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Caixa = styled.div`
-  height: 100px;
-  width: 55px;
+  width: 15vh;
 `;
 
 export const Digito = styled.svg`

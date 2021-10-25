@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { buscaNumero } from "../../services/api";
 
-import Visor from "../Visor";
+import Visor from "../../components/Visor";
 
 import {
   Campo,
@@ -40,37 +40,36 @@ const Jogo = () => {
 
   // Focar automaticamente o campo para melhorar o UX
   const campoRef = useRef(null);
-  
-  const focaCampo = () => {
-      const campo = campoRef.current;
 
-      if (campo.value === '') {
-        campo.focus();
-      } else {
-        campo.select();
-      }
-  }
+  const focaCampo = () => {
+    const campo = campoRef.current;
+
+    if (campo.value === "") {
+      campo.focus();
+    } else {
+      campo.select();
+    }
+  };
 
   const novoJogo = () => {
     // Carregar um novo número para adivinhar
     carregaResposta();
-    
-    setTentativa('');
+
+    setTentativa("");
     setValor(0);
     setStatus({
       classe: "",
       msg: "",
       fim: false,
     });
-
-    
   };
 
   const carregaResposta = () => {
     buscaNumero().then((pesquisa) => {
-      const novaResposta = pesquisa;console.log("pesq:", novaResposta);
+      const novaResposta = pesquisa;
 
       if (isNaN(novaResposta)) {
+        // Se não há número, é porque o serviço retornou erro!
         setStatus({
           classe: "falha",
           msg: "ERRO",
@@ -87,8 +86,8 @@ const Jogo = () => {
 
   const controlaInput = (e) => {
     setStatus({
-        ...status,
-        classe: ""
+      ...status,
+      classe: "",
     });
 
     const numero = e.target.value;
@@ -112,36 +111,38 @@ const Jogo = () => {
   };
 
   const enviaPalpite = (palpite) => {
-    palpite = Number(palpite); // Validação inicial
+    // Validação inicial: precisa haver algum palpite
+    if (palpite !== "") {
+      // Convertendo o valor em número para fazer cálculos
+      palpite = Number(palpite);
 
-    setValor(palpite);
+      setValor(palpite);
 
-    if (palpite === resposta) {
-      // CERTA RESPOSTA (ler com a voz do Sílvio Santos)
-      setStatus({
-        classe: "acerto",
-        msg: "Você acertou!!!!",
-        fim: true,
-      });
-    } else if (palpite > resposta) {
-      // Palpite é maior que a resposta
-      setStatus({
+      if (palpite === resposta) {
+        // CERTA RESPOSTA (ler com a voz do Sílvio Santos)
+        setStatus({
+          classe: "acerto",
+          msg: "Você acertou!!!!",
+          fim: true,
+        });
+      } else if (palpite > resposta) {
+        // Palpite é maior que a resposta
+        setStatus({
           ...status,
-        msg: "É menor",
-      });
-      setValor(palpite);
-
-      focaCampo();
-    } else if (palpite < resposta) {
-      // Palpite é menor que a resposta
-      setStatus({
-        ...status,
-        msg: "É maior",
-      });
-      setValor(palpite);
-
-      focaCampo();
+          msg: "É menor",
+        });
+        setValor(palpite);
+      } else if (palpite < resposta) {
+        // Palpite é menor que a resposta
+        setStatus({
+          ...status,
+          msg: "É maior",
+        });
+        setValor(palpite);
+      }
     }
+
+    focaCampo();
   };
 
   // Carregar um número para adivinhar imediatamente ao carregar o app
@@ -149,7 +150,7 @@ const Jogo = () => {
     carregaResposta();
 
     focaCampo();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

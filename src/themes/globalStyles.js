@@ -14,12 +14,23 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     background: linear-gradient(180deg, #EEEEEE 0%, #FFFFFF 100%) no-repeat;
-    min-height: 100vh;
+    height: 100%;
   }
 
   #root {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
+  }
+
+  // Efeito visual para fazer os elementos piscarem
+  .falha, .acerto {
+    animation: pisca 0.15s linear 3;
+  }
+
+  @keyframes pisca {
+    50% {
+      opacity: 0;
+    }
   }
 `;
 

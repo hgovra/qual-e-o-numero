@@ -1,3 +1,6 @@
+// Os números do visor são um SVG exportado pelo Figma.
+// Usando CSS, predefinimos cada número possível
+// e deixamos o React trocar a classe de acordo com o valor.
 import { Caixa, Digito } from "./style";
 
 const Algarismo = (props) => {

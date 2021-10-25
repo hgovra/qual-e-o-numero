@@ -5,6 +5,7 @@ import Algarismo from "../Algarismo";
 const Visor = (props) => {
   const { valor, status } = props;
 
+  // Transformando o número do visor em uma array para gerar os algarismos individualmente
   const sequencia = `${valor}`.split("");
 
   return (

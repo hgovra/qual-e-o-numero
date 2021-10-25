@@ -3,12 +3,12 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: `https://us-central1-ss-devops.cloudfunctions.net/rand?min=1&max=300`,
+  baseURL: `https://us-central1-ss-devops.cloudfunctions.net`,
 });
 
 export const buscaNumero = () => {
   return api
-    .get("")
+    .get(`/rand?min=1&max=300`)
     .then(({ data }) => {
       return data.value;
     })

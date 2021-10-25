@@ -1,7 +1,7 @@
 import { Reset } from "styled-reset";
 import GlobalStyle from "./themes/globalStyles";
 
-import Jogo from "./components/Jogo";
+import Jogo from "./pages/Jogo";
 
 const App = () => {
   return (

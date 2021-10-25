@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  display: flex;
   height: 100%;
-  width: 100vw;
+  width: 100%;
+  display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
 `;
 
 export const Topo = styled.header`
-  height: 10vh;
+  padding: 20px;
+  align-self: center flex-start;
 `;
 export const Titulo = styled.h1`
   font-family: "Montserrat", sans-serif;
@@ -35,11 +35,11 @@ export const Titulo = styled.h1`
 `;
 
 export const Resultado = styled.section`
-  height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  flex: 3;
 `;
 export const Msg = styled.span`
   font-family: Montserrat;
@@ -52,7 +52,6 @@ export const Msg = styled.span`
   display: inline-block;
   height: 20px;
   margin-bottom: 30px;
-  margin-top: -40px;
 
   &.falha {
     color: #cc3300;
@@ -64,7 +63,8 @@ export const Msg = styled.span`
 `;
 
 export const Espaco = styled.section`
-  height: 20vh;
+  padding: 20px;
+  flex: 1;
 `;
 export const Recomecar = styled.button`
   background: linear-gradient(180deg, #434854 0%, #9e9e9e 100%);
@@ -93,8 +93,9 @@ export const Palpite = styled.footer`
   display: flex;
   flex-direction: row;
   gap: 10px;
-  height: 20vh;
+  padding: 20px;
   flex-basis: content;
+  align-self: center flex-start;
 `;
 export const Campo = styled.input`
   background: #ffffff;
