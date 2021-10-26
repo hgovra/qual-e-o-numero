@@ -18,11 +18,12 @@ export const Titulo = styled.h1`
   font-size: 24px;
   line-height: 29px;
   letter-spacing: -1px;
-  color: #ef6c00;
   text-transform: uppercase;
   background: -webkit-linear-gradient(#ef6c00, #db6300);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  color: #ef6c00;
+  display: inline;
 
   &::after {
     display: block;
@@ -108,13 +109,13 @@ export const Campo = styled.input`
   color: #222222;
 
   &:focus {
-    border-color: #FF6600;
+    border-color: #ff6600;
     outline: none;
   }
   &::placeholder {
     color: #9e9e9e;
   }
-  &[type=number] {
+  &[type="number"] {
     -moz-appearance: textfield;
   }
   &::-webkit-outer-spin-button,

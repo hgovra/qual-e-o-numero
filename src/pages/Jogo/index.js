@@ -91,7 +91,7 @@ const Jogo = () => {
 
     const numero = e.target.value;
 
-    // Tamanho máximo do palpite: 3 caracteres (4 para validação)
+    // Tamanho máximo do palpite: 3 caracteres
     if (`${numero}`.length > 3) {
       e.target.value = 300;
       e.target.select();
