@@ -66,9 +66,7 @@ const Jogo = () => {
 
   const carregaResposta = () => {
     buscaNumero().then((pesquisa) => {
-      const novaResposta = pesquisa;
-
-      if (isNaN(novaResposta)) {
+      if (isNaN(pesquisa)) {
         // Se não há número, é porque o serviço retornou erro!
         setStatus({
           classe: "falha",
@@ -77,9 +75,13 @@ const Jogo = () => {
         });
         setValor(502);
       } else {
-        setResposta(novaResposta);
+        const campo = campoRef.current;
 
-        focaCampo();
+        if(campo) {
+          setResposta(pesquisa);
+
+          focaCampo();
+        }
       }
     });
   };
@@ -118,27 +120,29 @@ const Jogo = () => {
 
       setValor(palpite);
 
+      // CERTA RESPOSTA (ler com a voz do Sílvio Santos)
       if (palpite === resposta) {
-        // CERTA RESPOSTA (ler com a voz do Sílvio Santos)
         setStatus({
           classe: "acerto",
           msg: "Você acertou!!!!",
           fim: true,
         });
-      } else if (palpite > resposta) {
-        // Palpite é maior que a resposta
+      }
+      
+      // Palpite é maior que a resposta
+      if (palpite > resposta) {
         setStatus({
           ...status,
           msg: "É menor",
         });
-        setValor(palpite);
-      } else if (palpite < resposta) {
-        // Palpite é menor que a resposta
+      }
+      
+      // Palpite é menor que a resposta
+      if (palpite < resposta) {
         setStatus({
           ...status,
           msg: "É maior",
         });
-        setValor(palpite);
       }
     }
 
@@ -149,8 +153,7 @@ const Jogo = () => {
   useEffect(() => {
     carregaResposta();
 
-    focaCampo();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    //focaCampo();
   }, []);
 
   return (
@@ -160,7 +163,7 @@ const Jogo = () => {
       </Topo>
 
       <Resultado>
-        <Msg className={status.classe}>{status.msg}</Msg>
+        <Msg className={`${status.classe} visor-dica`}>{status.msg}</Msg>
         <Visor valor={valor} status={status.classe} />
       </Resultado>
 

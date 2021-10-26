@@ -9,7 +9,7 @@ const Visor = (props) => {
   const sequencia = `${valor}`.split("");
 
   return (
-    <Caixa className={status}>
+    <Caixa className={status} title={valor}>
       {sequencia.map((algarismo, index) => (
           <Algarismo numero={algarismo} key={`num-${index}-${algarismo}`} />
       ))}
