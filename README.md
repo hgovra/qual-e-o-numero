@@ -25,6 +25,8 @@ serve -s build
 
 ## Testes
 
+- 100% de cobertura.
+
 ```
 npm run test
 ```

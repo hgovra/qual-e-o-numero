@@ -42,13 +42,7 @@ const Jogo = () => {
   const campoRef = useRef(null);
 
   const focaCampo = () => {
-    const campo = campoRef.current;
-
-    if (campo.value === "") {
-      campo.focus();
-    } else {
-      campo.select();
-    }
+    campoRef.current.focus();
   };
 
   const novoJogo = () => {
@@ -65,23 +59,26 @@ const Jogo = () => {
   };
 
   const carregaResposta = () => {
-    buscaNumero().then((pesquisa) => {
-      if (isNaN(pesquisa)) {
-        // Se não há número, é porque o serviço retornou erro!
+    buscaNumero().then((consulta) => {
+      const { status, retorno } = consulta;
+
+      // Status 200 significa que carregou o número do servidor com sucesso
+      if (status === 200) {
+        const campo = campoRef.current;
+        
+        // Essa validação aqui é necessária para evitar erro nos testes
+        if(campo) {
+          setResposta(retorno);
+
+          focaCampo();
+        }
+      } else {
         setStatus({
           classe: "falha",
           msg: "ERRO",
           fim: true,
         });
-        setValor(502);
-      } else {
-        const campo = campoRef.current;
-
-        if(campo) {
-          setResposta(pesquisa);
-
-          focaCampo();
-        }
+        setValor(retorno);
       }
     });
   };
@@ -95,7 +92,10 @@ const Jogo = () => {
     const numero = e.target.value;
 
     // Tamanho máximo do palpite: 3 caracteres (4 para validação)
-    if (`${numero}`.length > 4) return false;
+    if (`${numero}`.length > 3) {
+      e.target.value = 300;
+      e.target.select();
+    }
 
     // Palpite mínimo: 1
     if (numero < 1) {
@@ -127,6 +127,7 @@ const Jogo = () => {
           msg: "Você acertou!!!!",
           fim: true,
         });
+        setTentativa('');
       }
       
       // Palpite é maior que a resposta
@@ -135,6 +136,7 @@ const Jogo = () => {
           ...status,
           msg: "É menor",
         });
+        setTentativa('');
       }
       
       // Palpite é menor que a resposta
@@ -143,6 +145,7 @@ const Jogo = () => {
           ...status,
           msg: "É maior",
         });
+        setTentativa('');
       }
     }
 
@@ -153,7 +156,8 @@ const Jogo = () => {
   useEffect(() => {
     carregaResposta();
 
-    //focaCampo();
+    focaCampo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
