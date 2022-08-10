@@ -31,7 +31,7 @@ serve -s build
 npm run test
 ```
 
-## Bibliotecas
+## Dependências
 
 - React
 - styled-components
