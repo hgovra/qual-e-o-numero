@@ -4,7 +4,7 @@ Pequeno jogo desenvolvido em React. Adivinhe o número de 1 a 300.
 
 Realizado como teste de Desenvolvimento Front-End para Estúdio Sol.
 
-Você pode visualizar aqui: [https://epic-easley.netlify.app/](https://epic-easley.netlify.app/)
+Pode ser visualizado rapidamente no endereço: [https://epic-easley.netlify.app/](https://epic-easley.netlify.app/)
 
 Para rodar localmente, baixe o repositório e execute os seguintes comandos:
 
